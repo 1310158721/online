@@ -1,0 +1,28 @@
+{
+	"apps": [
+		{
+			"name": "notes-api",
+			"script": "notes-api.js",
+			"env": {
+				"COMMON_VARIABLE": "true"
+			},
+			"env_production": {
+				"NODE_ENV": "production"
+			}
+		}
+	],
+	"deploy": {
+		"production": {
+			"user": "tang",
+			"host": ["120.79.203.120"],
+			"port": "39999",
+			"ref": "origin/master",
+			"repo": "https://gitee.com/tlh13101587201/notes-api.git",
+			"path": "/www/notes-api/production",
+			"ssh_options": "StrictHostKeyChecking=no",
+			"env": {
+				"NODE_ENV": "production"
+			}
+		}
+	}
+}
