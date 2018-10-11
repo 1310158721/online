@@ -88,6 +88,58 @@
 
 ### 8-1～2
    ==> 多看
+    
+
+### 9-1~2
+   ==> 部署服务器 mongodb 数据库
+   参考地址:https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+   根据参考地址的步骤即可
+   1. 连上服务器，执行命令
+      ==> sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+   2. 选择 Ubuntu 14.04, 复制其命令并执行
+      ==> echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+   3. 更新服务器本地的安装包
+      ==> sudo apt-get update
+   4. 安装mongodb,执行命令
+      ==> sudo apt-get install -y mongodb-org
+   5. 成功安装后，开启mongodb服务，执行命令
+      ==> sudo service mongod start
+      检查mongodb服务是否开启成功，检查日志文件，有日志则开启服务成功执行命令
+      ==> cat /var/log/mongodb/mongod.log
+   6. 连接mongodb服务，默认(没有修改数据库端口，默认连接地址为mongodb//127.0.0.1:27017)执行命令
+      ==> mongo
+   7. 退出mongodb服务，先退回用户根目录，执行命令
+      ==> ctrl + z
+      再退出mongodb服务，执行命令
+      ==> sudo service mongod stop
+   8. 修改数据库的默认端口，执行命令
+      ==> sudo vi /etc/mongod.conf
+      找到端口port,并修改为19999(其他的也可以)，保存退出并重启mongodb服务，执行命令
+      ==> sudo service mongod restart
+      重新连接数据库，执行命令
+      ==> mongo --port 19999
+   9. 向服务器数据库导入数据
+      备份用户本地数据(不是服务器的)
+      a. 在终端中进入本地(不是服务器的)数据库文件夹目录，执行命令(备份整个数据库，这里名称为shop)
+         ==> mongodump -h 127.0.0.1:12345 -d shop -o ./   (据库地址: 127.0.0.1:12345, -d shop: 指定数据库名称，-o ./: 保存在当前路径中)
+         打包备份好的文件，执行命令
+         ==> tar zcvf shop.tar.gz ./shop   (shop.tar.gz: 打包后的名称，./shop: 要打包的文件夹／文件)
+         上传打包后的文件到服务器，执行命令
+         ==> scp -P 39999 ./shop.tar.gz tang@120.79.203.120:/home/tang/   (./shop.tar.gz: 要传送的文件)
+         解压服务器上的打包文件，执行命令(服务器用户根目录上)
+         ==> tar xvf shop.tar.gz   (shop.tar.gz: 要解压的文件)
+         在服务器上将解压好的文件导入服务器的数据库上, 执行命令
+         ==> mongorestore --host 127.0.0.1:19999 -d shop ./shop/   (--host 127.0.0.1:19999: 数据库地址及端口， -d shop: 数据库名称， ./shop/: 导入数据的数据源文件夹)
+      b. 在终端中进入本地(不是服务器的)数据库文件夹目录，执行命令(备份整个数据库，这里名称为shop里面的other数据表)
+         mongoexport -h 127.0.0.1:12345 -d shop -c other -o ./other.json  (据库地址: 127.0.0.1:12345, -d shop: 指定数据库名称，-c: 指定数据库的某张表，-o ./: 保存在当前路径中)
+         上传备份好的文件到服务器，执行命令
+         scp -P 39999 ./other.json tang@120.79.203.120:/home/tang/
+         导入上传到服务器的文件到服务器上的数据库，执行命令
+         mongoimport --host 127.0.0.1:19999 -d shop -c other ./other.json
+         
+### 9-3~6
+    数据库的权限配置
+    待看......
 
 ### 10-1～2
    ==> 通过远程仓库码云作为第三方仓库，上传项目代码到服务器 本地 ==> 码云 ==> 服务器
