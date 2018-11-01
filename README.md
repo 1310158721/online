@@ -158,21 +158,21 @@
       www: 为根目录下的 www 文件夹  
       notes-api: 为 www 目录下的文件夹  
       在 www 文件夹下面修改 notes-api 文件夹的权限（修改为可读可写）  
-      ==> sudo chmod 777 notes-api  
+      ==> sudo chmod 777 notes-api
 
       {  
-        "apps": [  
-          {  
-            "name": "notes-api",  
-            "script": "notes-api.js",  
-            "env": {
-              "COMMON_VARIABLE": "true"  
-            },  
-            "env_production": {  
-              "NODE_ENV": "production"  
-            }  
-          }  
-        ],  
+        "apps": [
+          {
+            "name": "notes-api",
+            "script": "notes-api.js",
+            "env":
+              "COMMON_VARIABLE": "true"
+            },
+            "env_production": {
+              "NODE_ENV": "production"
+            }
+          }
+        ],
         "deploy": {
           "production": {
             "user": "tang",
