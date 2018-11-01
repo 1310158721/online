@@ -165,7 +165,7 @@
           {  
             "name": "notes-api",  
             "script": "notes-api.js",  
-            "env": {. 
+            "env": {
               "COMMON_VARIABLE": "true"  
             },  
             "env_production": {  
