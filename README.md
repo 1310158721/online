@@ -49,25 +49,25 @@
       ==> cd /etc/nginx/conf.d/  
       ==> sudo vi notes-api-tang-cn-8081.conf(举例子用的), 文件内容如下:  
 
-      upstream notes-api {  
-        server 127.0.0.1:8084;  
-      }  
+      upstream notes-api {
+        server 127.0.0.1:8084;
+      }
       
-      server {  
-        listen 80;  
-        server_name localhost;  
+      server {
+        listen 80;
+        server_name localhost;
       
-        location / {  
-          proxy_set_header X-Real-IP $remote_addr;  
-          proxy_set_header X-Forward For $proxy_add_x_forwarded_for;  
+        location / {
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forward For $proxy_add_x_forwarded_for;
       
-          proxy_set_header Host $http_host;  
-          proxy_set_header X-Nginx-Proxy true;  
+          proxy_set_header Host $http_host;
+          proxy_set_header X-Nginx-Proxy true;
     
-          proxy_pass http://notes-api;  
-          proxy_redirect off;  
-        }  
-      }  
+          proxy_pass http://notes-api;
+          proxy_redirect off;
+        }
+      }
 
       ==> 保存，退出并回到上一层目录  
    5.  编辑 nginx.conf 文件   
@@ -160,34 +160,34 @@
       在 www 文件夹下面修改 notes-api 文件夹的权限（修改为可读可写）  
       ==> sudo chmod 777 notes-api  
 
-      {  
-        "apps": [  
-          {  
-            "name": "notes-api",  
-            "script": "notes-api.js",  
-            "env": {  
-              "COMMON_VARIABLE": "true"  
-            },  
-            "env_production": {  
-              "NODE_ENV": "production"  
-            }  
-          }  
-        ],  
-        "deploy": {  
-          "production": {  
-            "user": "tang",  
-            "host": ["120.79.203.120"],  
-            "port": "39999",  
-            "ref": "origin/master",  
-            "repo": "https://gitee.com/tlh13101587201/notes-api.git",  
-            "path": "/www/notes-api/production",  
-            "ssh_options": "StrictHostKeyChecking=no",  
-            "env": {  
-              "NODE_ENV": "production"  
-            }  
-          }  
-        }  
-      }  
+      {
+        "apps": [
+          {
+            "name": "notes-api",
+            "script": "notes-api.js",
+            "env": {
+              "COMMON_VARIABLE": "true"
+            },
+            "env_production": {
+              "NODE_ENV": "production"
+            }
+          }
+        ],
+        "deploy": {
+          "production": {
+            "user": "tang",
+            "host": ["120.79.203.120"],
+            "port": "39999",
+            "ref": "origin/master",
+            "repo": "https://gitee.com/tlh13101587201/notes-api.git",
+            "path": "/www/notes-api/production",
+            "ssh_options": "StrictHostKeyChecking=no",
+            "env": {
+              "NODE_ENV": "production"
+            }
+          }
+        }
+      }
 
       4. 上传本地代码到远程仓库，更新远程仓库  
 
