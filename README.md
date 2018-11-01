@@ -161,7 +161,7 @@
       ==> sudo chmod 777 notes-api  
 
       {
-        "apps": [
+        "apps": [  
           {
             "name": "notes-api",
             "script": "notes-api.js",
@@ -172,7 +172,7 @@
               "NODE_ENV": "production"
             }
           }
-        ],
+        ],  
         "deploy": {
           "production": {
             "user": "tang",
