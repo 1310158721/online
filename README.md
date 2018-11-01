@@ -160,18 +160,18 @@
       在 www 文件夹下面修改 notes-api 文件夹的权限（修改为可读可写）  
       ==> sudo chmod 777 notes-api  
 
-      {
+      {  
         "apps": [  
-          {
-            "name": "notes-api",
-            "script": "notes-api.js",
-            "env": {
-              "COMMON_VARIABLE": "true"
-            },
-            "env_production": {
-              "NODE_ENV": "production"
-            }
-          }
+          {  
+            "name": "notes-api",  
+            "script": "notes-api.js",  
+            "env": {. 
+              "COMMON_VARIABLE": "true"  
+            },  
+            "env_production": {  
+              "NODE_ENV": "production"  
+            }  
+          }  
         ],  
         "deploy": {
           "production": {
